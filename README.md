@@ -8,9 +8,11 @@
 
 [Dataset - Human Activity Recognition Using Smartphones](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
 
+Authors: Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+
 Files:  
 
-`codebook.md` - a code book that describes variables, data and processes performed to prepare and clean up the data.
+`codebook.md` - a code book that describes variables, data and processes performed to prepare, clean up and analyse the data.
 
 `run_analysis.R` - performs the tasks for the assignment as follows:
 1. Merges the training and the test sets to create one data set.
