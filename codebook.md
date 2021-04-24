@@ -1,6 +1,6 @@
 # CODEBOOK
 
-## Getting and cleaning the data in RStudio's shell
+## Getting and cleaning the data
 
 Download the dataset:  
 + Dataset downloaded and unzipped in folder `UCI HAR Dataset`
@@ -25,8 +25,6 @@ Assign each data subset to variables:
 *contains train data of activities’ code labels*  
 
 ## Analysing the data
-
-The script `run_analysis.R` performs the 5 tasks required for the assignment.
 
 1. Merges the training and the test sets to create one data set:  
 + `x` (10299 rows, 561 columns) is created by merging `x_train` and `x_test` using `rbind()`   
