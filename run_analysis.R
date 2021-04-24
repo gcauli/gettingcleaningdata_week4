@@ -1,0 +1,41 @@
+## This is the R script for Getting and Cleaning Data - Week 4 Assignment
+
+## Author: Giulia Cauli
+## giulia.cauli@studium.uni-hamburg.de
+## Version 20210424, Apr. 24th 2021
+
+## Merging the training and test sets together
+x <- rbind(x_train, x_test)
+y <- rbind(y_train, y_test)
+subject <- rbind(subject_train, subject_test)
+merged_data <- cbind(subject, y, x)
+
+## Extracting mean and standard deviation from data set
+tidy_data <- merged_data %>% select(subject, code, contains("mean"), contains("std"))
+
+## Using descriptive activity names
+tidy_data$code <- activities[tidy_data$code, 2]
+
+## Labeling variables in data set with descriptive names
+names(tidy_data)[2] = "activity"
+names(tidy_data)<-gsub("Acc", "Accelerometer", names(tidy_data))
+names(tidy_data)<-gsub("Gyro", "Gyroscope", names(tidy_data))
+names(tidy_data)<-gsub("BodyBody", "Body", names(tidy_data))
+names(tidy_data)<-gsub("Mag", "Magnitude", names(tidy_data))
+names(tidy_data)<-gsub("^t", "Time", names(tidy_data))
+names(tidy_data)<-gsub("^f", "Frequency", names(tidy_data))
+names(tidy_data)<-gsub("tBody", "TimeBody", names(tidy_data))
+names(tidy_data)<-gsub("-mean()", "Mean", names(tidy_data), ignore.case = TRUE)
+names(tidy_data)<-gsub("-std()", "StandardDeviation", names(tidy_data), ignore.case = TRUE)
+names(tidy_data)<-gsub("-freq()", "Frequency", names(tidy_data), ignore.case = TRUE)
+names(tidy_data)<-gsub("angle", "Angle", names(tidy_data))
+names(tidy_data)<-gsub("gravity", "Gravity", names(tidy_data))
+
+## Creating second, independent data set with the average of each variable
+## for each activity and each subject
+final_data <- tidy_data %>%
+      group_by(subject, activity) %>%
+      summarise_all(list(mean))
+
+## Creating .txt file containing the data set
+write.table(final_data, "FinalData.txt", row.name=FALSE)
