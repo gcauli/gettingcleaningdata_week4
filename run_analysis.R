@@ -8,13 +8,13 @@ library(dplyr)
 
 filename <- "GettingCleaningData_Final_Data.zip"
 
-## Checking if archive already exists
+## Checking if archive exists
 if (!file.exists(filename)){
       fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
       download.file(fileURL, filename, method="curl")
 }  
 
-## Checking if folder exists
+## Checking if folder exists, else unzipping it
 if (!file.exists("UCI HAR Dataset")) { 
       unzip(filename) 
 }
@@ -56,8 +56,7 @@ names(tidy_data)<-gsub("-freq()", "Frequency", names(tidy_data), ignore.case = T
 names(tidy_data)<-gsub("angle", "Angle", names(tidy_data))
 names(tidy_data)<-gsub("gravity", "Gravity", names(tidy_data))
 
-## Creating second, independent data set with the average of each variable
-## for each activity and each subject
+## Creating second, independent data set with the average of each variable for each activity and each subject
 final_data <- tidy_data %>%
       group_by(subject, activity) %>%
       summarise_all(list(mean))
